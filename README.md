@@ -1,17 +1,8 @@
 
-# Deep Reinforcement Learning for Traffic Lights Control
+# Venom: AI for Traffic Light Control
 ## Background
 
-(More about model description, see in _Intelligent Transportation System.md_)
-
-[_Deep Reinforcement Learning for Intelligent Transportation Systems_ NIPS 2018 Workshop MLITS](https://openreview.net/forum?id=BJl846ey97)
-
-The states transformation principle is shown in the graph:
-<p align="center">
-<img src="https://github.com/quantumiracle/DQN_traffic_light_control/blob/master/images/states.png" width="30%">
-</p>
-
-__States__ representation:
+Representation:
 
 ''0'': green light for direction 1 and hence red light for direction 2;\
 ''1'': green light for direction 2 and hence red light for direction 1;\
@@ -22,48 +13,6 @@ __Actions__ representation: (contrary to in paper)
 
 ⓪: change state\
 ①: keep on
-
-## Getting Started
-
-To run this repo, you need to use **Pyhton 3.5**.
-
-Generally, use `python xxx.py --train` for training and `python xxx.py --test` for testing.
-
-Running the code in different categories:
-
-### Deep Q-Networks (DQN):
-
- **./1.one_way_two_queue**:
-
-`python light_constr.py --train/test`
-
-**./2.two_intersections(linear)**:
-
-`python lights.py --train/test`
-
-**./3.grid_square_network**:
-
-`python lights.py --train`
-
-**./4.multithread_for_grid**:
-
-`python lights.py --train/test`
-
-**./5.one_agent_for_each_intersection**:
-
-```python lights_re.py --train/test```
-
-### Deep Deterministic Policy Gradients (DDPG):
-
-Generally, use `python -m run.py --alg=ddpg --num_timesteps=xxx --train` for training, `python -m run.py --alg=ddpg --num_timesteps=xxx --test` for testing and `python -m run.py --alg=ddpg --num_timesteps=xxx --retrain` for retraining from last saved checkpoint.
-
-**./6.ddpg_for_single**, **./7.ddpg_for_linear**  and **./8.ddpg_for_grid**:
-
-`python -m run.py --alg=ddpg --num_timesteps=1e4 --train/test/retrain`
-
-
-
-# Deep Q-Networks
 
 ## Single Unidirectional Intersection (two roads)
 
@@ -86,16 +35,11 @@ According to general transportation principles, the state transition of traffic 
 <img src="https://github.com/quantumiracle/DQN_traffic_light_control/blob/master/images/1inter.png" width="25%">
 </p>
 
-
-
 ### Training:
 
 <p align="center">
 <img src="https://github.com/quantumiracle/DQN_traffic_light_control/blob/master/images/train.png" width="40%">
 </p>
-
-
-Code in  **./1.one_way_two_queue**.
 
 ## Linear-Network Intersections
 ### Model Description:
@@ -106,7 +50,6 @@ Linear network model is combined with multiple single intersections on a line, a
 <img src="https://github.com/quantumiracle/DQN_traffic_light_control/blob/master/images/linear_network5.png" width="70%">
 </p>
 
-
 ### Visualized Simulation in Experiments: 
 
 the color of lights is 'green' or 'red' or 'yellow'. The black rectangular represents incoming car for periphery of road networks. The numbers indicates number of cars on each road. If the light is 'green', the number of cars in that road will reduce the number of passing cars after transition. If there is 'black rectangular', the number of cars in the corresponding road will increase one after transition. The upper image is the state before transition, while the lower image is the state after transition. 
@@ -115,15 +58,11 @@ the color of lights is 'green' or 'red' or 'yellow'. The black rectangular repre
 <img src="https://github.com/quantumiracle/DQN_traffic_light_control/blob/master/images/Screenshot.png" width="60%">
 </p>
 
-
 ### Training:
 
 <p align="center">
 <img src="https://github.com/quantumiracle/DQN_traffic_light_control/blob/master/images/train1.png" width="40%">
 </p>
-
-
-Code in **./2.two_intersections(linear)**.
 
 ## Grid-Square-Network Intersections
 
@@ -133,14 +72,11 @@ Code in **./2.two_intersections(linear)**.
 <img src="https://github.com/quantumiracle/DQN_traffic_light_control/blob/master/images/grid_square_network.png" width="40%">
  </p>
 
-
-
 ### Visualized Simulation in Experiments: 
 
   <p align="center">
 <img src="https://github.com/quantumiracle/DQN_traffic_light_control/blob/master/images/4*4.png" width="35%">
   </p>
-
 
 ### Training:
 
@@ -148,20 +84,13 @@ Code in **./2.two_intersections(linear)**.
 <img src="https://github.com/quantumiracle/DQN_traffic_light_control/blob/master/images/2*2_100m.png" width="40%">
 </p>
 
-
-Code in **./3.grid_square_network**.
-
 ## Multi-thread version code for grid network
 
 Apply multi-thread for accelerating training process.
 
-Code in **./4.multithread_for_grid**.
-
 ## Agent for single intersection
 
 Single agent for every intersection (instead of single agent for whole road network), input of agent is from each one intersection. All intersections share the same agent, every time agent stores [obs,a,r,obs_] for each intersection, share the same overall reward (`lights.py`) or restore each reward for each intersection (`lights_re.py`).
-
-Code in **./5.one_agent_for_each_intersection**.
 
 # Deep Deterministic Policy Gradients
 
@@ -175,10 +104,6 @@ Basic environments are similar with for DQN, only with main/branch road differen
 <img src="https://github.com/quantumiracle/DQN_traffic_light_control/blob/master/images/ddpg4single.png" width="80%">
 </p>
 
-
-
- Code in **./6.ddpg_for_single**.
-
 ## Linear-Network Intersections
 
 Testing of 10*1 linear network.
@@ -187,10 +112,6 @@ Testing of 10*1 linear network.
 <img src="https://github.com/quantumiracle/DQN_traffic_light_control/blob/master/images/ddpg4linear.png" width="100%">
 </p>
 
-
-
-Code in **./7.ddpg_for_linear**.
-
 ## Grid-Square-Network Intersections
 
 Testing of 10*5 grid network.
@@ -198,20 +119,3 @@ Testing of 10*5 grid network.
 <p align="center">
 <img src="https://github.com/quantumiracle/DQN_traffic_light_control/blob/master/images/ddpg4grid1.png" width="100%">
 </p>
-
-
-
-
-Code in **./8.ddpg_for_grid**.
-
-# Citation:
-If you use this repository for any projects, please cite this paper：
-```
-@article{liu2018deep,
-  title={Deep Reinforcement Learning for Intelligent Transportation Systems},
-  author={Liu, Xiao-Yang and Ding, Zihan and Borst, Sem and Walid, Anwar},
-  journal={arXiv preprint arXiv:1812.00979},
-  year={2018}
-}
-
-```
